@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>Music Store | Instrumentos Musicais</title>
+
+    <!-- Estilo global -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Fonte clássica e elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ================= CABEÇALHO ================= -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Music</h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="pages/produtos.html">Instrumentos</a></li>
+                    <li><a href="pages/carrinho.html">Carrinho</a></li>
+                    <li><a href="pages/login.html">Entrar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= BANNER ================= -->
+    <section class="banner">
+        <div class="banner-content">
+            <h2>O som da sua paixão começa aqui </h2>
+            <p>Explore violões, guitarras, baterias e muito mais com qualidade e estilo.</p>
+            <a href="pages/produtos.html" class="btn-destaque">Ver Instrumentos</a>
+        </div>
+    </section>
+
+    <!-- ================= SEÇÃO DE DESTAQUES ================= -->
+    <section class="destaques">
+        <div class="container">
+            <h2>Mais Vendidos</h2>
+            <div class="produtos-grid" id="produtos-destaque">
+                <!-- Produtos carregados dinamicamente via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SEÇÃO DE NOVIDADES ================= -->
+    <section class="novidades">
+        <div class="container">
+            <h2>Novidades</h2>
+            <div class="produtos-grid" id="produtos-novos">
+                <!-- Produtos novos carregados via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= RODAPÉ ================= -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
+            <p>
+                <a href="pages/admin.html">Área Administrativa</a> |
+                <a href="pages/login.html">Minha Conta</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Script principal -->
+    <script src="js/script.js"></script>
+</body>
+</html>

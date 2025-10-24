@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "nome": "Violão Acústico Yamaha C40",
+        "preco": 1199.90,
+        "imagem": "img/violao.jpg",
+        "categoria": "Cordas",
+        "destaque": true,
+        "novo": false
+    },
+    {
+        "id": 2,
+        "nome": "Bateria Pearl Export EXX",
+        "preco": 7499.00,
+        "imagem": "img/bateria.jpg",
+        "categoria": "Percussão",
+        "destaque": false,
+        "novo": true
+    },
+    {
+        "id": 3,
+        "nome": "Teclado Casio CT-X3000",
+        "preco": 3499.00,
+        "imagem": "img/teclado.jpg",
+        "categoria": "Teclas",
+        "destaque": true,
+        "novo": true
+    },
+    {
+        "id": 4,
+        "nome": "Guitarra Fender Stratocaster",
+        "preco": 8999.00,
+        "imagem": "img/guitarra.jpeg",
+        "categoria": "Cordas",
+        "destaque": true,
+        "novo": false
+    }
+]

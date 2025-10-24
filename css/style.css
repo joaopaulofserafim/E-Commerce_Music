@@ -1,0 +1,411 @@
+/* ==========================================================
+   STYLE.CSS — MORETTO MUSIC STORE
+   Tema: Clássico e Elegante | UX/UI Premium
+   ========================================================== */
+
+/* ======== VARIÁVEIS DE TEMA ======== */
+:root {
+    --cor-fundo: #ab7e4a6a;
+    --cor-card: #ff0a0a;
+    --cor-destaque: #ffffff;
+    /* Dourado elegante */
+    --cor-texto: #f5f5f5;
+    --cor-texto-sec: #b0b0b0;
+    --cor-madeira: #5c3d2e;
+    /* toque de madeira */
+    --cor-hover: #e3c465;
+    --cor-erro: #d9534f;
+    --cor-sucesso: #5cb85c;
+    --fonte-titulo: "Playfair Display", serif;
+    --fonte-texto: "Open Sans", sans-serif;
+    --sombra-card: 0 2px 10px rgba(0, 0, 0, 0.4);
+    --transicao: all 0.3s ease;
+}
+
+/* ======== RESET E BASE ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-texto);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+a:hover {
+    color: var(--cor-hover);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ======== HEADER FIXO ======== */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #a07146;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+
+.logo {
+    font-family: var(--fonte-titulo);
+    font-size: 1.7rem;
+    color: var(--cor-destaque);
+    letter-spacing: 1px;
+}
+
+/* ======== MENU E DROPDOWN ======== */
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav a {
+    color: var(--cor-texto);
+    font-weight: 600;
+    position: relative;
+}
+
+.nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: black;
+    transition: var(--transicao);
+}
+
+.nav a:hover::after,
+.nav a.active::after {
+    width: 100%;
+}
+
+/* Dropdown elegante */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background: var(--cor-card);
+    border: 1px solid var(--cor-madeira);
+    border-radius: 6px;
+    box-shadow: var(--sombra-card);
+    min-width: 180px;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--cor-texto);
+}
+
+.dropdown-content a:hover {
+    background-color: var(--cor-madeira);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* ======== BANNER / CARROSSEL ======== */
+.banner {
+    margin-top: 75px;
+    height: 80vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.269), rgba(0, 0, 0, 0.735)),
+        url('../img/banner1.webp') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.banner-content {
+    color: var(--cor-texto);
+    max-width: 600px;
+}
+
+.banner-content h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 2.8rem;
+    color: var(--cor-destaque);
+    margin-bottom: 10px;
+}
+
+.banner-content p {
+    color: var(--cor-texto-sec);
+    margin-bottom: 25px;
+}
+
+.btn-destaque {
+    background-color: var(--cor-destaque);
+    color: #000;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: var(--transicao);
+}
+
+.btn-destaque:hover {
+    background-color:  black;
+    color: var(--cor-destaque);
+}
+
+/* ======== SEÇÕES ======== */
+section {
+    padding: 80px 0;
+}
+
+h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ======== CARDS DE PRODUTO ======== */
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card-produto {
+    background-color: var(--cor-card);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    padding: 15px;
+    transition: var(--transicao);
+    box-shadow: var(--sombra-card);
+}
+
+.card-produto:hover {
+    transform: translateY(-5px);
+    border-color: var(--cor-destaque);
+}
+
+.card-produto img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.card-produto h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+}
+
+.card-produto .preco {
+    color: var(--cor-destaque);
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+.card-produto button {
+    background: var(--cor-destaque);
+    border: none;
+    padding: 10px 20px;
+    color: #000;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: var(--transicao);
+    cursor: pointer;
+}
+
+.card-produto button:hover {
+    background-color: var(--cor-hover);
+}
+
+/* ======== CARRINHO ======== */
+.carrinho {
+    max-width: 800px;
+    margin: auto;
+}
+
+.item-carrinho {
+    background-color: var(--cor-card);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.item-carrinho img {
+    width: 80px;
+    border-radius: 6px;
+}
+
+.resumo-carrinho {
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* ======== FORMULÁRIOS (LOGIN, CADASTRO, PAGAMENTO) ======== */
+.formulario {
+    background-color: var(--cor-card);
+    padding: 30px;
+    max-width: 420px;
+    margin: 60px auto;
+    border-radius: 10px;
+    box-shadow: var(--sombra-card);
+}
+
+.formulario h2 {
+    color: var(--cor-destaque);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario input,
+.formulario select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #181818;
+    color: var(--cor-texto);
+}
+
+.formulario button {
+    width: 100%;
+    background-color: var(--cor-destaque);
+    color: #000;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: var(--transicao);
+}
+
+.formulario button:hover {
+    background-color: var(--cor-hover);
+}
+
+/* ======== ALERTAS DO SISTEMA ======== */
+.alerta {
+    padding: 12px;
+    border-radius: 6px;
+    margin: 15px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.alerta.erro {
+    background-color: var(--cor-erro);
+    color: #fff;
+}
+
+.alerta.sucesso {
+    background-color: var(--cor-sucesso);
+    color: #fff;
+}
+
+/* ======== ADMIN ======== */
+.admin {
+    background-color: var(--cor-card);
+    padding: 40px;
+    max-width: 800px;
+    margin: 80px auto;
+    border-radius: 10px;
+}
+
+.admin h2 {
+    color: var(--cor-destaque);
+    margin-bottom: 20px;
+}
+
+.admin input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #181818;
+    color: var(--cor-texto);
+}
+
+.admin button {
+    background-color: var(--cor-destaque);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transicao);
+}
+
+.admin button:hover {
+    background-color: var(--cor-hover);
+}
+
+/* ======== FOOTER ======== */
+.footer {
+    background-color: #A07146;
+    border-top: 1px solid var(--cor-destaque);
+    text-align: center;
+    padding: 25px 0;
+    color: var(--cor-texto-sec);
+}
+
+.footer a {
+    color: var(--cor-destaque);
+    margin: 0 10px;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .banner {
+        height: 60vh;
+        padding: 40px 0;
+    }
+
+    .item-carrinho {
+        flex-direction: column;
+        text-align: center;
+    }
+}

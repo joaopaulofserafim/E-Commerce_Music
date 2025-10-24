@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrinho | Moretto Music Store</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🎵 Moretto Music Store</h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="produtos.html">Instrumentos</a></li>
+                    <li><a href="carrinho.html" class="active">Carrinho</a></li>
+                    <li><a href="login.html">Entrar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Seu Carrinho</h2>
+        <div id="lista-carrinho">
+            <!-- Itens do carrinho gerados via JS -->
+        </div>
+
+        <div class="resumo-compra">
+            <p>Subtotal: <span id="subtotal">R$ 0,00</span></p>
+            <p>Frete: <span id="frete">R$ 0,00</span></p>
+            <p><strong>Total: <span id="total">R$ 0,00</span></strong></p>
+            <button id="btn-finalizar" class="btn-destaque">Finalizar Compra</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
