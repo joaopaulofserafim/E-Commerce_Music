@@ -6,19 +6,19 @@
 /* ======== VARIÁVEIS DE TEMA ======== */
 :root {
     --cor-fundo: #ab7e4a6a;
-    --cor-card: #ff0a0a;
+    --cor-card: #bea385d4;
     --cor-destaque: #ffffff;
     /* Dourado elegante */
     --cor-texto: #f5f5f5;
     --cor-texto-sec: #b0b0b0;
     --cor-madeira: #5c3d2e;
     /* toque de madeira */
-    --cor-hover: #e3c465;
-    --cor-erro: #d9534f;
+    --cor-hover: #b3b0b0;
+    --cor-erro: #f35d57;
     --cor-sucesso: #5cb85c;
     --fonte-titulo: "Playfair Display", serif;
     --fonte-texto: "Open Sans", sans-serif;
-    --sombra-card: 0 2px 10px rgba(0, 0, 0, 0.4);
+    --sombra-card: 0 10px 20px rgba(0, 0, 0, 0.4);
     --transicao: all 0.3s ease;
 }
 
@@ -168,8 +168,8 @@ a:hover {
 }
 
 .btn-destaque {
-    background-color: var(--cor-destaque);
-    color: #000;
+    background-color: black;
+    color: #ffffff;
     padding: 12px 30px;
     border-radius: 30px;
     font-weight: 600;
@@ -177,8 +177,8 @@ a:hover {
 }
 
 .btn-destaque:hover {
-    background-color:  black;
-    color: var(--cor-destaque);
+    background-color:  rgb(255, 255, 255);
+    color: black;
 }
 
 /* ======== SEÇÕES ======== */
@@ -377,10 +377,10 @@ h2 {
 /* ======== FOOTER ======== */
 .footer {
     background-color: #A07146;
-    border-top: 1px solid var(--cor-destaque);
+    border-top: 2px solid black;
     text-align: center;
     padding: 25px 0;
-    color: var(--cor-texto-sec);
+    color: white;
 }
 
 .footer a {
@@ -407,5 +407,90 @@ h2 {
     .item-carrinho {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+
+
+/* ======== LOGIN E CADASTRO ======== */
+.form-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 100px;
+    background-color: var(--cor-fundo);
+}
+
+.login-card {
+    background-color: var(--cor-card);
+    border-radius: 12px;
+    box-shadow: var(--sombra-card);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 20px;
+}
+
+.login-card h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin-bottom: 25px;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    color: var(--cor-texto);
+    margin-bottom: 5px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #333;
+    background-color: #ffffff;
+    color: black;
+    font-size: 1rem;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: var(--cor-hover);
+}
+
+.login-card .btn-destaque {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.link-secundario {
+    margin-top: 20px;
+    color: white;
+}
+
+.link-secundario a {
+    color: var(--cor-destaque);
+    font-weight: 600;
+}
+
+.link-secundario a:hover {
+    color: black;
+}
+
+/* ======== RESPONSIVIDADE LOGIN ======== */
+@media (max-width: 768px) {
+    .login-card {
+        padding: 25px;
+    }
+
+    .login-card h2 {
+        font-size: 1.5rem;
     }
 }
