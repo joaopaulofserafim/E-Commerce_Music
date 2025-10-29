@@ -1,49 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin | Moretto Music Store</title>
-    <link rel="stylesheet" href="../css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Administrativo | Moretto Music Store</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">Painel Administrativo</h1>
-            <nav class="nav">
-                <ul>
-                    <li><a href="../index.html">Voltar à Loja</a></li>
-                </ul>
-            </nav>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">Painel Administrativo</h1>
+      <nav class="nav">
+        <ul>
+          <li><a href="../index.html">Voltar à Loja</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <section class="admin-header">
+      <h2>Gerenciar Produtos</h2>
+      <p>Adicione, edite ou remova produtos facilmente.</p>
+    </section>
+
+    <section class="admin-form">
+      <form id="form-produto">
+        <div class="input-group">
+          <label for="nome">Nome do Produto</label>
+          <input type="text" id="nome" placeholder="Ex: Violão Yamaha" required />
         </div>
-    </header>
 
-    <main class="container admin">
-        <h2>Gerenciar Produtos</h2>
-        <form id="form-produto">
-            <input type="text" id="nome" placeholder="Nome do produto" required />
-            <input type="number" id="preco" placeholder="Preço" required />
-            <input type="number" id="estoque" placeholder="Estoque" required />
-            <input type="text" id="imagem" placeholder="Caminho da imagem" />
-            <textarea id="descricao" placeholder="Descrição"></textarea>
-            <button type="submit" class="btn-destaque">Adicionar Produto</button>
-        </form>
-
-        <h3>Lista de Produtos</h3>
-        <div id="lista-admin-produtos">
-            <!-- Lista carregada via JS -->
+        <div class="input-group">
+          <label for="preco">Preço (R$)</label>
+          <input type="number" id="preco" step="0.01" placeholder="Ex: 1299.99" required />
         </div>
-    </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2025 Moretto Music Store. Área Administrativa.</p>
+        <div class="input-group">
+          <label for="estoque">Estoque</label>
+          <input type="number" id="estoque" placeholder="Ex: 15" required />
         </div>
-    </footer>
 
-    <script src="../js/script.js"></script>
+        <div class="input-group">
+          <label for="imagem">Imagem do Produto</label>
+          <input type="file" id="imagem" accept="image/*" />
+          <img id="preview-imagem" alt="Pré-visualização" class="preview" />
+        </div>
+
+        <div class="input-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" rows="3" placeholder="Escreva uma breve descrição..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-destaque">Adicionar Produto</button>
+      </form>
+    </section>
+
+    <section class="admin-lista">
+      <h3>Lista de Produtos</h3>
+      <div id="lista-admin-produtos" class="lista-produtos-admin">
+        <!-- Populado via JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Moretto Music Store. Painel Administrativo.</p>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
 </body>
-
 </html>

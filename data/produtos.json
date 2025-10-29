@@ -34,5 +34,40 @@
         "categoria": "Cordas",
         "destaque": true,
         "novo": false
+    },
+    {
+        "id": 5,
+        "nome": "Microfone Shure SM58",
+        "preco": 799.90,
+        "imagem": "img/microfone.jpg",
+        "categoria": "Voz",
+        "destaque": true,
+        "novo": true
+    },
+    {
+        "id": 6,
+        "nome": "Amplificador Fender Mustang LT25",
+        "preco": 1299.00,
+        "imagem": "img/amplificador.jpg",
+        "categoria": "Acessórios",
+        "destaque": true,
+        "novo": false
+    },{
+        "id": 7,
+        "nome": "Baixo Elétrico Yamaha TRBX174",
+        "preco": 1999.90,
+        "imagem": "img/baixo.jpg",
+        "categoria": "Cordas",
+        "destaque": true,
+        "novo": false
+    },
+    {
+        "id": 8,
+        "nome": "Cajón Meinl Headliner",
+        "preco": 599.90,
+        "imagem": "img/cajon.jpg",
+        "categoria": "Percussão",
+        "destaque": false,
+        "novo": true
     }
 ]
