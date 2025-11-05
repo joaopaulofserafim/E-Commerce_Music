@@ -49,10 +49,25 @@ a:hover {
     color: var(--cor-hover);
 }
 
+.bolder{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: var(--cor-destaque);
+    
+}
+
 .container {
     width: 90%;
     max-width: 1200px;
     margin: auto;
+}
+
+.container h2{
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin-bottom: 20px;
+    font-size: xx-large;
+
 }
 
 /* ======== HEADER FIXO ======== */
@@ -60,7 +75,7 @@ a:hover {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #a07146;
+    background-color: #7b5532;
     border-bottom: 2px solid rgb(0, 0, 0);
     z-index: 1000;
     backdrop-filter: blur(10px);
@@ -142,9 +157,9 @@ a:hover {
 /* ======== BANNER / CARROSSEL ======== */
 .banner {
     margin-top: 75px;
-    height: 80vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.269), rgba(0, 0, 0, 0.735)),
-        url('../img/banner1.webp') center/cover no-repeat;
+    height: 100vh;
+   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('../img/banner1.webp') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,6 +167,34 @@ a:hover {
 
 }
 
+.destaques{
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('../img/instrumentos-musicais-em-ingles.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.novidades{
+   height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('../img/instrumentos-musicais-voce-sabe-quais-sao-os-mais-tocados-no-mundo-20191202180617.jpg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#catalogo-produtos{
+     height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('../img/instrumentos-musicais-voce-sabe-quais-sao-os-mais-tocados-no-mundo-20191202180617.jpg.jpg') center/cover no-repeat;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 .banner-content {
     color: var(--cor-texto);
     max-width: 600px;
@@ -202,16 +245,6 @@ h2 {
     gap: 25px;
 }
 
-.card-produto {
-    background-color:#a07146 ;
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 12px;
-    text-align: center;
-    padding: 15px;
-    transition: var(--transicao);
-    box-shadow: var(--sombra-card);
-     border: 1px solid black;
-}
 
 .card-produto:hover {
     transform: translateY(-15px);
@@ -379,7 +412,7 @@ h2 {
 
 /* ======== FOOTER ======== */
 .footer {
-    background-color: #A07146;
+    background-color:#7b5532;;
     border-top: 2px solid black;
     text-align: center;
     padding: 25px 0;
@@ -543,14 +576,18 @@ h2 {
 }
 
 .card-produto {
-    background-color: #a07146;
+    background-color: rgba(141, 89, 41, 0.744);
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     transition: all 0.4s ease;
-    border: none;
     position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    text-align: center;
+    padding: 15px;
 }
+
+
 
 .card-produto img {
     width: 100%;
