@@ -1,5 +1,5 @@
 /* ==========================================================
-    Music Store - Script Principal
+    Music Store - Script Principal (Corrigido)
    ========================================================== */
 
 // ========================
@@ -14,6 +14,7 @@ let usuarioLogado = JSON.parse(localStorage.getItem("usuario")) || null;
 // ========================
 async function carregarProdutos() {
     try {
+     
         const caminho =
             location.pathname.includes("/pages/")
                 ? "../data/produtos.json"
@@ -22,25 +23,40 @@ async function carregarProdutos() {
         const res = await fetch(caminho);
         produtos = await res.json();
 
+        // Home
         if (document.getElementById("produtos-destaque")) {
             carregarDestaques();
             carregarNovidades();
         }
 
+        // Página Catálogo
         if (document.getElementById("lista-produtos")) {
             carregarCatalogo();
         }
+
+        // Página Produto individual
+        if (document.getElementById("produto-detalhe")) {
+            carregarProdutoIndividual();
+        }
+
     } catch (error) {
         console.error("Erro ao carregar produtos:", error);
     }
 }
 
+// ========================
+// 🔹 CRIAÇÃO DE CARDS
+// ========================
 function criarCard(produto) {
     return `
         <div class="card-produto">
             <img src="${produto.imagem}" alt="${produto.nome}">
             <h3>${produto.nome}</h3>
             <p class="preco">R$ ${produto.preco.toFixed(2)}</p>
+
+            <!-- Ajuste: link correto para página de produto -->
+            <a href="produto.html?id=${produto.id}" class="btn-ver">Ver Produto</a>
+
             <button class="btn-add" data-id="${produto.id}">Adicionar ao Carrinho</button>
         </div>
     `;
@@ -63,27 +79,60 @@ function carregarCatalogo() {
     container.innerHTML = produtos.map(criarCard).join("");
 }
 
-// ========================
-// 🔹 CARRINHO
-// ========================
+
+function carregarProdutoIndividual() {
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("id"));
+    const produto = produtos.find(p => p.id === id);
+
+    if (!produto) return;
+
+    document.getElementById("produtoImagem").src = produto.imagem;
+    document.getElementById("produtoNome").textContent = produto.nome;
+    document.getElementById("produtoPreco").textContent = "R$ " + produto.preco.toFixed(2);
+    document.getElementById("produtoDescricao").textContent = produto.descricao;
+
+    // Estoque
+    document.getElementById("produtoEstoque").textContent =
+        produto.estoque > 0 ? `Em estoque (${produto.estoque})` : "Indisponível";
+
+    document
+        .getElementById("btnAddDetalhe")
+        .setAttribute("data-id", produto.id);
+}
+
+
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn-add")) {
         const id = parseInt(e.target.dataset.id);
         const produto = produtos.find(p => p.id === id);
         adicionarAoCarrinho(produto);
     }
+
     if (e.target.classList.contains("remover-item")) {
         removerDoCarrinho(e.target.dataset.id);
     }
 });
 
 function adicionarAoCarrinho(produto) {
+    
+    if (produto.estoque <= 0) {
+        alert("Produto sem estoque disponível.");
+        return;
+    }
+
     const itemExistente = carrinho.find(p => p.id === produto.id);
+
     if (itemExistente) {
+        if (itemExistente.qtd >= produto.estoque) {
+            alert("Quantidade máxima do estoque atingida.");
+            return;
+        }
         itemExistente.qtd += 1;
     } else {
         carrinho.push({ ...produto, qtd: 1 });
     }
+
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     alert("Produto adicionado ao carrinho!");
 }
@@ -121,9 +170,7 @@ function exibirCarrinho() {
     totalContainer.textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
-// ========================
-// 🔹 LOGIN / CADASTRO
-// ========================
+
 function login(event) {
     event.preventDefault();
     const email = document.getElementById("loginEmail").value;
@@ -156,9 +203,7 @@ function logout() {
     window.location.href = "../index.html";
 }
 
-// ========================
-// 🔹 PAGAMENTO (SIMULADO)
-// ========================
+
 function finalizarPagamento(event) {
     event.preventDefault();
     const numeroCartao = document.getElementById("numeroCartao").value;
@@ -171,19 +216,25 @@ function finalizarPagamento(event) {
         return;
     }
 
-    const aprovado = Math.random() > 0.2; // 80% de chance de aprovação
+    const aprovado = Math.random() > 0.2;
+
     if (aprovado) {
+    
+        carrinho.forEach(item => {
+            const produtoOriginal = produtos.find(p => p.id === item.id);
+            if (produtoOriginal) produtoOriginal.estoque -= item.qtd;
+        });
+
+        localStorage.setItem("produtos", JSON.stringify(produtos));
         localStorage.removeItem("carrinho");
-        alert("Pagamento aprovado! Seu pedido foi confirmado.");
+
+        alert("Pagamento aprovado!");
         window.location.href = "confirmacao.html";
     } else {
         alert("Pagamento recusado. Verifique os dados e tente novamente.");
     }
 }
 
-// ========================
-// 🔹 INICIALIZAÇÃO
-// ========================
 document.addEventListener("DOMContentLoaded", () => {
     carregarProdutos();
 
