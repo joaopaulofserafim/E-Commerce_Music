@@ -8,10 +8,10 @@
   </head>
 
   <body>
-    <!-- ======== CABEÇALHO ======== -->
     <header class="header">
       <div class="container">
-        <h1 class="logo"><a href="\index.html">Music</a></h1>
+        <h1 class="logo"><a href="../index.html">Music</a></h1>
+
         <nav class="nav">
           <ul>
             <li><a href="../index.html">Início</a></li>
@@ -23,29 +23,27 @@
       </div>
     </header>
 
-    <!-- ======== CATÁLOGO ======== -->
-    <main class="container catalogo" >
+    <main class="container catalogo">
       <section id="catalogo-produtos">
         <h2>Catálogo de Instrumentos</h2>
 
         <div class="filtros">
           <input type="text" id="busca" placeholder="Buscar instrumento..." />
-          <select id="categoria">
+
+          <select id="filtroCategoria">
             <option value="">Todas as categorias</option>
-            <option value="cordas">Cordas</option>
-            <option value="percussao">Percussão</option>
-            <option value="sopro">Sopro</option>
-            <option value="teclas">Teclas</option>
+            <option value="Cordas">Cordas</option>
+            <option value="Percussão">Percussão</option>
+            <option value="Sopro">Sopro</option>
+            <option value="Teclas">Teclas</option>
           </select>
         </div>
 
-        <div class="produtos-grid" id="lista-produtos">
-          <!-- Produtos carregados via JS -->
-        </div>
+        <div class="produtos-grid" id="lista-produtos"></div>
       </section>
     </main>
 
-    <!-- ======== RODAPÉ ======== -->
+    <!-- ================= RODAPÉ ================= -->
     <footer class="footer">
       <div class="container">
         <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
@@ -53,5 +51,36 @@
     </footer>
 
     <script src="../js/script.js"></script>
+
+    <script>
+      const inputBusca = document.getElementById("busca");
+      const selectCategoria = document.getElementById("filtroCategoria");
+
+      function filtrarCatalogo() {
+        const termo = inputBusca.value.toLowerCase();
+        const categoria = selectCategoria.value;
+
+        const produtosCards = document.querySelectorAll(".card-produto");
+
+        produtosCards.forEach((card) => {
+          const nome = card.querySelector("h3").textContent.toLowerCase();
+          const categoriaProduto = card.dataset.categoria;
+
+          const combinaNome = nome.includes(termo);
+          const combinaCategoria =
+            categoria === "" || categoriaProduto === categoria;
+
+          if (combinaNome && combinaCategoria) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      inputBusca.addEventListener("input", filtrarCatalogo);
+      selectCategoria.addEventListener("change", filtrarCatalogo);
+    </script>
+    <div id="alerta-msg" class="alerta-popup"></div>
   </body>
 </html>

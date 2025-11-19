@@ -5,6 +5,8 @@
         "preco": 1199.90,
         "imagem": "img/violao.jpg",
         "categoria": "Cordas",
+        "descricao": "Violão acústico clássico Yamaha C40, tampo em spruce e excelente timbre para iniciantes e avançados.",
+        "estoque": 12,
         "destaque": true,
         "novo": false
     },
@@ -14,6 +16,8 @@
         "preco": 7499.00,
         "imagem": "img/bateria.jpg",
         "categoria": "Percussão",
+        "descricao": "Bateria Pearl Export EXX com excelente projeção sonora e acabamento de alta qualidade.",
+        "estoque": 5,
         "destaque": false,
         "novo": true
     },
@@ -23,6 +27,8 @@
         "preco": 3499.00,
         "imagem": "img/teclado.jpg",
         "categoria": "Teclas",
+        "descricao": "Teclado Casio CT-X3000 com 800 timbres, ideal para performances e estúdios.",
+        "estoque": 8,
         "destaque": true,
         "novo": true
     },
@@ -32,6 +38,8 @@
         "preco": 8999.00,
         "imagem": "img/guitarra.jpeg",
         "categoria": "Cordas",
+        "descricao": "Guitarra Fender Stratocaster, um clássico com timbre versátil e acabamento impecável.",
+        "estoque": 6,
         "destaque": true,
         "novo": false
     },
@@ -41,6 +49,8 @@
         "preco": 799.90,
         "imagem": "img/microfone.jpg",
         "categoria": "Voz",
+        "descricao": "Microfone Shure SM58, padrão mundial para vocais ao vivo e gravações.",
+        "estoque": 20,
         "destaque": true,
         "novo": true
     },
@@ -50,14 +60,19 @@
         "preco": 1299.00,
         "imagem": "img/amplificador.jpg",
         "categoria": "Acessórios",
+        "descricao": "Amplificador Fender Mustang LT25 com efeitos digitais e alto desempenho.",
+        "estoque": 10,
         "destaque": true,
         "novo": false
-    },{
+    },
+    {
         "id": 7,
         "nome": "Baixo Elétrico Yamaha TRBX174",
         "preco": 1999.90,
         "imagem": "img/baixo.jpg",
         "categoria": "Cordas",
+        "descricao": "Baixo Yamaha TRBX174 com corpo leve e som potente, ideal para diversos estilos.",
+        "estoque": 7,
         "destaque": true,
         "novo": false
     },
@@ -67,6 +82,8 @@
         "preco": 599.90,
         "imagem": "img/cajon.jpg",
         "categoria": "Percussão",
+        "descricao": "Cajón Meinl Headliner com ótimo grave e resposta sensível para percussão acústica.",
+        "estoque": 15,
         "destaque": false,
         "novo": true
     }

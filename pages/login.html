@@ -1,55 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login |  Music </title>
+    <title>Login | Music</title>
     <link rel="stylesheet" href="../css/style.css" />
-</head>
+  </head>
 
-<body>
-    <!-- ================= CABEÇALHO ================= -->
+  <body>
     <header class="header">
-        <div class="container">
-              <h1 class="logo"><a href="\index.html">Music</a></h1>
-            <nav class="nav">
-                <ul>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="produtos.html">Instrumentos</a></li>
-                    <li><a href="carrinho.html">Carrinho</a></li>
-                    <li><a href="login.html" class="active">Entrar</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container">
+        <h1 class="logo"><a href="../index.html">Music</a></h1>
+
+        <nav class="nav">
+          <ul>
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="produtos.html">Instrumentos</a></li>
+            <li><a href="carrinho.html">Carrinho</a></li>
+            <li><a href="login.html" class="active">Entrar</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <!-- ================= CONTEÚDO LOGIN ================= -->
     <main class="form-container">
-        <div class="login-card">
-            <h2>Entrar na Conta</h2>
-            <form id="form-login">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="seuemail@email.com" required />
+      <div class="login-card">
+        <h2>Entrar na Conta</h2>
 
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" placeholder="********" required />
+        <form id="form-login" onsubmit="login(event)">
+          <label for="loginEmail">E-mail</label>
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="seuemail@email.com"
+            required
+          />
 
-                <button type="submit" class="btn-destaque">Entrar</button>
-            </form>
+          <label for="loginSenha">Senha</label>
+          <input
+            type="password"
+            id="loginSenha"
+            placeholder="********"
+            required
+          />
 
-            <p class="link-secundario">
-                Não tem conta? <a href="cadastro.html">Cadastre-se</a>
-            </p>
+          <button type="submit" class="btn-destaque">Entrar</button>
+        </form>
+
+        <p class="link-secundario">
+          Não tem conta? <a href="cadastro.html">Cadastre-se</a>
+        </p>
+        <div class="recuperar-senha">
+          <p><a href="#" onclick="recuperarSenha()">Esqueceu a senha?</a></p>
         </div>
+      </div>
     </main>
 
-    <!-- ================= RODAPÉ ================= -->
     <footer class="footer">
-        <div class="container">
-            <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
-        </div>
+      <div class="container">
+        <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
+      </div>
     </footer>
 
     <script src="../js/script.js"></script>
-</body>
+
+    <script>
+      function recuperarSenha() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioCadastrado"));
+
+        if (!usuario) {
+          alert("Nenhum cadastro encontrado.");
+          return;
+        }
+
+        alert(`Um link de recuperação foi enviado para: ${usuario.email}`);
+      }
+    </script>
+    <div id="alerta-msg" class="alerta-popup"></div>
+  </body>
 </html>

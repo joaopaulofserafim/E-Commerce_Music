@@ -1,22 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Confirmação | Moretto Music Store</title>
+    <title>Pedido Confirmado</title>
+
     <link rel="stylesheet" href="../css/style.css" />
-</head>
 
-<body>
-    <main class="container confirmacao">
-        <h2>Compra Confirmada! ✅</h2>
-        <p>Obrigado por comprar com a <strong>Music</strong>!</p>
-        <p>Seu número de pedido é: <span id="numero-pedido"></span></p>
-        <a href="../index.html" class="btn-destaque">Voltar à Loja</a>
-    </main>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f8f8f8;
+        margin: 0;
+      }
 
-    <script src="../js/script.js"></script>
-</body>
+      .alerta-confirmacao {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+      }
 
+      .alerta-confirmacao h2 {
+        margin-bottom: 10px;
+      }
+
+      #numero-pedido {
+        font-weight: bold;
+        color: #d4a017; /* dourado */
+        font-size: 1.2rem;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 20px;
+        background: #d4a017;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #b58810;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="alerta-confirmacao">
+      <h2>Compra Confirmada! 🎉</h2>
+
+      <p>Obrigado por comprar conosco.</p>
+
+      <p>Seu número de pedido é:</p>
+      <p id="numero-pedido"></p>
+
+      <a href="../index.html" class="btn">Voltar à Loja</a>
+    </div>
+
+    <script>
+      const idPedido = Math.floor(Math.random() * 900000 + 100000);
+      document.getElementById("numero-pedido").textContent = idPedido;
+
+      localStorage.removeItem("carrinho");
+    </script>
+    <div id="alerta-msg" class="alerta-popup"></div>
+  </body>
 </html>

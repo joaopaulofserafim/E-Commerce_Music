@@ -1,76 +1,234 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Administrativo | Moretto Music Store</title>
-  <link rel="stylesheet" href="../css/style.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo | Moretto Music Store</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<body>
-  <header class="header">
-    <div class="container">
-      <h1 class="logo">Painel Administrativo</h1>
-      <nav class="nav">
-        <ul>
-          <li><a href="../index.html">Voltar à Loja</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="admin-container">
-    <section class="admin-header">
-      <h2>Gerenciar Produtos</h2>
-      <p>Adicione, edite ou remova produtos facilmente.</p>
-    </section>
-
-    <section class="admin-form">
-      <form id="form-produto">
-        <div class="input-group">
-          <label for="nome">Nome do Produto</label>
-          <input type="text" id="nome" placeholder="Ex: Violão Yamaha" required />
-        </div>
-
-        <div class="input-group">
-          <label for="preco">Preço (R$)</label>
-          <input type="number" id="preco" step="0.01" placeholder="Ex: 1299.99" required />
-        </div>
-
-        <div class="input-group">
-          <label for="estoque">Estoque</label>
-          <input type="number" id="estoque" placeholder="Ex: 15" required />
-        </div>
-
-        <div class="input-group">
-          <label for="imagem">Imagem do Produto</label>
-          <input type="file" id="imagem" accept="image/*" />
-          <img id="preview-imagem" alt="Pré-visualização" class="preview" />
-        </div>
-
-        <div class="input-group">
-          <label for="descricao">Descrição</label>
-          <textarea id="descricao" rows="3" placeholder="Escreva uma breve descrição..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-destaque">Adicionar Produto</button>
-      </form>
-    </section>
-
-    <section class="admin-lista">
-      <h3>Lista de Produtos</h3>
-      <div id="lista-admin-produtos" class="lista-produtos-admin">
-        <!-- Populado via JS -->
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="logo">Painel Administrativo</h1>
+        <nav class="nav">
+          <ul>
+            <li><a href="../index.html">Voltar à Loja</a></li>
+            <li><a href="#" onclick="logoutAdmin()">Logout Admin</a></li>
+          </ul>
+        </nav>
       </div>
-    </section>
-  </main>
+    </header>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 Moretto Music Store. Painel Administrativo.</p>
-    </div>
-  </footer>
+    <script>
+      const adminLogado = JSON.parse(localStorage.getItem("admin"));
 
-  <script src="../js/script.js"></script>
-</body>
+      if (!adminLogado || adminLogado.permissao !== "admin") {
+        alert("Acesso negado! Somente administradores podem entrar aqui.");
+        window.location.href = "login.html";
+      }
+
+      function logoutAdmin() {
+        localStorage.removeItem("admin");
+        alert("Admin desconectado.");
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <main class="admin-container">
+      <section class="admin-header">
+        <h2>Gerenciar Produtos</h2>
+        <p>Adicione, edite ou remova produtos facilmente.</p>
+      </section>
+
+      <section class="admin-form">
+        <form id="form-produto">
+          <input type="hidden" id="produto-id" />
+
+          <div class="input-group">
+            <label for="nome">Nome do Produto</label>
+            <input
+              type="text"
+              id="nome"
+              placeholder="Ex: Violão Yamaha"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="categoria">Categoria</label>
+
+            <input
+              type="text"
+              id="categoria"
+              placeholder="Ex: Violões, Teclados..."
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="preco">Preço (R$)</label>
+            <input
+              type="number"
+              id="preco"
+              step="0.01"
+              placeholder="Ex: 1299.99"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="estoque">Estoque</label>
+            <input type="number" id="estoque" placeholder="Ex: 15" required />
+          </div>
+
+          <div class="input-group">
+            <label for="imagem">Imagem (URL)</label>
+
+            <input
+              type="text"
+              id="imagem"
+              placeholder="Ex: ../img/violao1.jpg"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="descricao">Descrição</label>
+            <textarea
+              id="descricao"
+              rows="3"
+              placeholder="Descreva o produto..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" id="btn-submit" class="btn-destaque">
+            Adicionar Produto
+          </button>
+        </form>
+      </section>
+      <section class="admin-lista">
+        <h3>Lista de Produtos</h3>
+        <div id="lista-admin-produtos" class="lista-produtos-admin"></div>
+      </section>
+      <div id="alerta-msg" class="alerta-popup"></div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2025 Moretto Music Store. Painel Administrativo.</p>
+      </div>
+    </footer>
+
+    <script>
+      let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+
+      function carregarListaAdmin() {
+        const container = document.getElementById("lista-admin-produtos");
+
+        if (produtos.length === 0) {
+          container.innerHTML = "<p>Nenhum produto cadastrado.</p>";
+          return;
+        }
+
+        container.innerHTML = produtos
+          .map(
+            (p) => `
+        <div class="admin-item">
+          <img src="${p.imagem}" alt="${p.nome}">
+          <div>
+            <h4>${p.nome}</h4>
+            <p>Preço: R$ ${p.preco.toFixed(2)}</p>
+            <p>Estoque: ${p.estoque}</p>
+          </div>
+
+          <button class="btn-editar" onclick="editarProduto(${
+            p.id
+          })">Editar</button>
+          <button class="btn-remover" onclick="removerProduto(${
+            p.id
+          })">Remover</button>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      carregarListaAdmin();
+
+      document
+        .getElementById("form-produto")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const id = document.getElementById("produto-id").value;
+          const nome = document.getElementById("nome").value;
+          const categoria = document.getElementById("categoria").value;
+          const preco = parseFloat(document.getElementById("preco").value);
+          const estoque = parseInt(document.getElementById("estoque").value);
+          const imagem = document.getElementById("imagem").value;
+          const descricao = document.getElementById("descricao").value;
+
+          if (id) {
+            // 🔧 EDITAR PRODUTO
+            const index = produtos.findIndex((p) => p.id == id);
+            produtos[index] = {
+              id: Number(id),
+              nome,
+              categoria,
+              preco,
+              estoque,
+              imagem,
+              descricao,
+            };
+            alert("Produto atualizado!");
+          } else {
+            const novoProduto = {
+              id: Date.now(),
+              nome,
+              categoria,
+              preco,
+              estoque,
+              imagem,
+              descricao,
+              destaque: false,
+              novo: false,
+            };
+
+            produtos.push(novoProduto);
+            alert("Produto adicionado!");
+          }
+
+          localStorage.setItem("produtos", JSON.stringify(produtos));
+          carregarListaAdmin();
+          e.target.reset();
+          document.getElementById("btn-submit").textContent =
+            "Adicionar Produto";
+          document.getElementById("produto-id").value = "";
+        });
+
+      function removerProduto(id) {
+        if (!confirm("Tem certeza que deseja remover este produto?")) return;
+
+        produtos = produtos.filter((p) => p.id !== id);
+        localStorage.setItem("produtos", JSON.stringify(produtos));
+        carregarListaAdmin();
+      }
+
+      function editarProduto(id) {
+        const produto = produtos.find((p) => p.id === id);
+
+        document.getElementById("produto-id").value = produto.id;
+        document.getElementById("nome").value = produto.nome;
+        document.getElementById("categoria").value = produto.categoria;
+        document.getElementById("preco").value = produto.preco;
+        document.getElementById("estoque").value = produto.estoque;
+        document.getElementById("imagem").value = produto.imagem;
+        document.getElementById("descricao").value = produto.descricao;
+
+        document.getElementById("btn-submit").textContent = "Salvar Alterações";
+      }
+    </script>
+  </body>
 </html>

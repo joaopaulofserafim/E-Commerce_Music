@@ -48,19 +48,22 @@ async function carregarProdutos() {
 // 🔹 CRIAÇÃO DE CARDS
 // ========================
 function criarCard(produto) {
+    const basePath = location.pathname.includes("/pages/")
+        ? "produto.html?id="
+        : "pages/produto.html?id=";
+
     return `
-        <div class="card-produto">
+        <div class="card-produto" data-categoria="${produto.categoria}">
             <img src="${produto.imagem}" alt="${produto.nome}">
             <h3>${produto.nome}</h3>
             <p class="preco">R$ ${produto.preco.toFixed(2)}</p>
 
-            <!-- Ajuste: link correto para página de produto -->
-            <a href="produto.html?id=${produto.id}" class="btn-ver">Ver Produto</a>
-
+            <a href="${basePath + produto.id}" class="btn-ver">Ver Produto</a>
             <button class="btn-add" data-id="${produto.id}">Adicionar ao Carrinho</button>
         </div>
     `;
 }
+
 
 function carregarDestaques() {
     const container = document.getElementById("produtos-destaque");

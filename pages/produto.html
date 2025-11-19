@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detalhes do Produto |  Music</title>
+    <title>Detalhes do Produto | Music</title>
     <link rel="stylesheet" href="../css/style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <div class="container">
-             <h1 class="logo"><a href="\index.html">Music</a></h1>
-            <nav class="nav">
-                <ul>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="produtos.html">Instrumentos</a></li>
-                    <li><a href="carrinho.html">Carrinho</a></li>
-                    <li><a href="login.html">Entrar</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container">
+        <h1 class="logo"><a href="../index.html">Music</a></h1>
+
+        <nav class="nav">
+          <ul>
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="produtos.html">Instrumentos</a></li>
+            <li><a href="carrinho.html">Carrinho</a></li>
+            <li><a href="login.html">Entrar</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <main class="container" id="detalhe-produto">
-        <!-- Detalhes do produto carregados via JS -->
+    <main class="container">
+      <div id="produto-detalhe" class="produto-detalhe">
+        <div class="coluna-imagem">
+          <img id="produtoImagem" src="" alt="Imagem do Produto" />
+        </div>
+
+        <div class="coluna-info">
+          <h2 id="produtoNome"></h2>
+          <p id="produtoPreco" class="preco"></p>
+
+          <p id="produtoEstoque" class="estoque"></p>
+
+          <h3>Descrição</h3>
+          <p id="produtoDescricao"></p>
+
+          <button id="btnAddDetalhe" class="btn-destaque">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
-        </div>
+      <div class="container">
+        <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
+      </div>
     </footer>
 
     <script src="../js/script.js"></script>
-</body>
-
+    <div id="alerta-msg" class="alerta-popup"></div>
+  </body>
 </html>
