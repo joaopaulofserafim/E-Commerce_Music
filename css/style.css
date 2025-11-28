@@ -25,9 +25,7 @@
   --transition: all 0.35s ease;
 }
 
-/* ==========================
-   RESET & BASE GLOBAL
-   ========================== */
+
 
 * {
   margin: 0;
@@ -82,9 +80,6 @@ h2 {
   color: var(--color-accent-soft);
 }
 
-/* ==========================
-   BOTÕES & ELEMENTOS GERAIS
-   ========================== */
 
 .btn-destaque {
   display: inline-flex;
@@ -144,9 +139,7 @@ h2 {
   color: #fff;
 }
 
-/* ==========================
-   HEADER FIXO
-   ========================== */
+
 
 .header {
   position: fixed;
@@ -232,9 +225,7 @@ h2 {
   background: rgba(246, 196, 83, 0.15);
 }
 
-/* ==========================
-   BANNER (HOME)
-   ========================== */
+
 
 .banner {
   min-height: calc(100vh - 80px);
@@ -275,9 +266,6 @@ h2 {
   margin-bottom: 24px;
 }
 
-/* ==========================
-   SEÇÕES HOME (DESTAQUES / NOVIDADES)
-   ========================== */
 
 section {
   padding: 70px 0;
@@ -298,9 +286,7 @@ section {
   margin-bottom: 35px;
 }
 
-/* ==========================
-   GRID DE PRODUTOS (CARDS)
-   ========================== */
+
 
 .produtos-grid {
   display: grid;
@@ -415,9 +401,6 @@ section {
   transform: translateY(0);
 }
 
-/* ==========================
-   CATÁLOGO (produtos.html)
-   ========================== */
 
 .catalogo {
   margin-top: 40px;
@@ -485,9 +468,6 @@ section {
     0 12px 26px rgba(0, 0, 0, 0.85);
 }
 
-/* ==========================
-   CARRINHO (carrinho.html)
-   ========================== */
 
 .carrinho-page {
   margin-top: 40px;
@@ -598,9 +578,6 @@ section {
   margin-top: 10px;
 }
 
-/* ==========================
-   PÁGINA DETALHE PRODUTO
-   ========================== */
 
 #produto-detalhe,
 #detalhe-produto {
@@ -660,10 +637,6 @@ section {
   margin-bottom: 14px;
   color: var(--color-text);
 }
-
-/* ==========================
-   FORMULÁRIOS: LOGIN, CADASTRO, PAGAMENTO
-   ========================== */
 
 .form-container {
   min-height: 100vh;
@@ -819,9 +792,7 @@ section {
   margin: 4px 0;
 }
 
-/* ==========================
-   PÁGINA ADMIN
-   ========================== */
+
 
 .admin-container {
   margin-top: 40px;
@@ -994,9 +965,7 @@ section {
   box-shadow: 0 6px 16px rgba(244, 67, 54, 0.5);
 }
 
-/* ==========================
-   ALERTAS VISUAIS DO SISTEMA
-   ========================== */
+
 
 .alerta-popup {
   position: fixed;
@@ -1029,9 +998,7 @@ section {
   transform: translateY(0);
 }
 
-/* ==========================
-   FOOTER
-   ========================== */
+
 
 .footer {
   background: #120c08;
@@ -1054,9 +1021,6 @@ section {
   color: #ffffff;
 }
 
-/* ==========================
-   RESPONSIVIDADE
-   ========================== */
 
 @media (max-width: 900px) {
   .header .container {
@@ -1132,9 +1096,7 @@ section {
     background: var(--primary-dark);
 }
 
-/* ==========================
-   PÁGINA DE PAGAMENTO (pagamento.html)
-   ========================== */
+
 
 .main-pagamento {
     padding-top: 40px;
@@ -1353,9 +1315,7 @@ section {
 }
 
 
-/* ==========================
-   MODAL DE CONFIRMAÇÃO
-   ========================== */
+
 
 .modal-overlay {
     display: none;
