@@ -1,46 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pagamento | Music</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <title>Pagamento | Music Store</title>
     <link rel="stylesheet" href="../css/style.css" />
-  </head>
+</head>
 
-  <body>
+<body>
+    <div id="alerta-msg" class="alerta-popup"></div>
+
     <header class="header">
-      <div class="container">
-        <h1 class="logo"><a href="../index.html">Music</a></h1>
-      </div>
+        <div class="container">
+            <h1 class="logo"><a href="../index.html">Music</a></h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="produtos.html">Instrumentos</a></li>
+                    <li><a href="carrinho.html" class="active">Carrinho</a></li>
+                    <li><a href="login.html" id="btn-auth">Entrar</a></li>
+                    <li><a href="admin.html" class="admin-icone" title="Área Administrativa" id="btn-admin">⚙</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="container form-container">
-      <h2>Pagamento</h2>
+    <main class="container main-pagamento">
+        <h2>Finalizar Compra</h2>
+        
+        <div class="pagamento-layout">
+            
+            <!-- Coluna 1: Formulário de Pagamento e Endereço -->
+            <div class="pagamento-form-coluna">
+                <div class="card-pagamento">
+                    <h3>Endereço de Entrega</h3>
+                    <form id="form-pagamento" onsubmit="finalizarPagamento(event)">
+                        
+                        <div class="form-group-inline">
+                            <div class="form-field">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" maxlength="9" placeholder="00000-000" onblur="buscarCEP()" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="logradouro">Endereço</label>
+                                <input type="text" id="logradouro" required />
+                            </div>
+                        </div>
 
-      <form id="form-pagamento" onsubmit="finalizarPagamento(event)">
-        <label for="numeroCartao">Número do Cartão</label>
-        <input type="text" id="numeroCartao" maxlength="16" required />
+                        <div class="form-group-inline">
+                            <div class="form-field">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" id="bairro" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" required />
+                            </div>
+                            <div class="form-field uf-field">
+                                <label for="uf">UF</label>
+                                <input type="text" id="uf" maxlength="2" required />
+                            </div>
+                        </div>
 
-        <label for="nomeCartao">Nome no Cartão</label>
-        <input type="text" id="nomeCartao" required />
+                        <h3>Forma de Pagamento</h3>
+                        <div class="form-field">
+                            <select id="formaPagamento" required>
+                                <option value="">Selecione a forma de pagamento</option>
+                                <option value="cartao">Cartão de Crédito</option>
+                                <option value="pix">Pix</option>
+                                <option value="boleto">Boleto</option>
+                            </select>
+                        </div>
 
-        <label for="validadeCartao">Validade</label>
-        <input type="month" id="validadeCartao" required />
+                        <!-- Campos de Cartão de Crédito -->
+                        <div id="dados-cartao" class="pagamento-instrucao-box card-data-fields">
+                            <div class="form-field">
+                                <label for="numeroCartao">Número do Cartão</label>
+                                <input type="text" id="numeroCartao" maxlength="16" placeholder="0000 0000 0000 0000" />
+                            </div>
+                            <div class="form-field">
+                                <label for="nomeCartao">Nome no Cartão</label>
+                                <input type="text" id="nomeCartao" placeholder="Nome impresso no cartão" />
+                            </div>
+                            <div class="form-group-inline">
+                                <div class="form-field">
+                                    <label for="validadeCartao">Validade</label>
+                                    <input type="month" id="validadeCartao" />
+                                </div>
+                                <div class="form-field">
+                                    <label for="cvvCartao">CVV</label>
+                                    <input type="number" id="cvvCartao" maxlength="4" placeholder="123" />
+                                </div>
+                            </div>
+                        </div>
 
-        <label for="cvvCartao">CVV</label>
-        <input type="number" id="cvvCartao" maxlength="3" required />
+                        <!-- Instruções para PIX -->
+                        <div id="instrucoes-pix" class="pagamento-instrucao-box" style="display: none;">
+                            <div class="instrucao-pix">
+                                <h4>Pagamento via PIX</h4>
+                                <p>Escaneie o QR Code abaixo ou copie a chave PIX para finalizar a compra.</p>
+                                <div class="qr-code-placeholder">
+                                    <!-- Simulação de QR Code -->
+                                    <img src="https://via.placeholder.com/150x150?text=QR+Code+PIX" alt="QR Code PIX" style="border-radius: 8px; margin: 10px 0;">
+                                </div>
+                                <p><strong>Chave PIX:</strong> 00.000.000/0001-00</p>
+                                <p class="aviso-pix">O pedido será confirmado após a compensação do pagamento.</p>
+                            </div>
+                        </div>
 
-        <button type="submit" class="btn-destaque">Confirmar Pagamento</button>
-      </form>
+                        <!-- Instruções para Boleto -->
+                        <div id="instrucoes-boleto" class="pagamento-instrucao-box" style="display: none;">
+                            <div class="instrucao-boleto">
+                                <h4>Pagamento via Boleto Bancário</h4>
+                                <p>Clique no botão abaixo para gerar e visualizar seu boleto.</p>
+                                <button type="button" class="btn-secundario" onclick="gerarBoleto()">Gerar Boleto</button>
+                                <p class="aviso-boleto">O prazo de compensação é de até 3 dias úteis.</p>
+                            </div>
+                        </div>
+
+                        <h3>Frete</h3>
+                        <div class="form-field">
+                            <select id="tipoFrete" onchange="calcularFrete()">
+                                <option value="">Selecione o frete</option>
+                                <option value="normal">Normal (5-8 dias)</option>
+                                <option value="expresso">Expresso (2-3 dias)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="pagamento-frete-resumo">
+                            <p id="valorFrete">Frete: <span class="valor-frete">R$ 0,00</span></p>
+                            <p id="totalPagamento">Total com frete: <span class="valor-total">R$ 0,00</span></p>
+                        </div>
+
+                        <button type="submit" class="btn-destaque btn-confirmar-pagamento">Confirmar Pagamento</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Resumo do Pedido -->
+            <div class="pagamento-resumo-coluna">
+                <div class="card-pagamento resumo-pedido">
+                    <h3>Seu Pedido</h3>
+                    <div id="resumo-itens">
+                        <!-- Itens do carrinho serão injetados aqui pelo JavaScript -->
+                        <p class="resumo-vazio">Seu carrinho está vazio.</p>
+                    </div>
+                    
+                    <div class="resumo-totais">
+                        <p>Subtotal: <span id="resumo-subtotal">R$ 0,00</span></p>
+                        <p>Frete: <span id="resumo-frete">R$ 0,00</span></p>
+                        <p class="total-final">Total: <span id="resumo-total-final">R$ 0,00</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
-      <div class="container">
-        <p>© 2025 Moretto Music Store. Todos os direitos reservados.</p>
-      </div>
+        <div class="container">
+            <p>© 2025 Music Store. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <script src="../js/script.js"></script>
-    <div id="alerta-msg" class="alerta-popup"></div>
-  </body>
+</body>
 </html>

@@ -1,77 +1,184 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pedido Confirmado</title>
-
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <title>Confirmação de Pedido | Music Store</title>
     <link rel="stylesheet" href="../css/style.css" />
+</head>
 
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background: #f8f8f8;
-        margin: 0;
-      }
+<body>
+    <div id="alerta-msg" class="alerta-popup"></div>
 
-      .alerta-confirmacao {
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        text-align: center;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-        max-width: 400px;
-      }
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><a href="../index.html">Music</a></h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="produtos.html">Instrumentos</a></li>
+                    <li><a href="carrinho.html">Carrinho</a></li>
+                    <li><a href="login.html" id="btn-auth">Entrar</a></li>
+                    <li><a href="admin.html" class="admin-icone" title="Área Administrativa" id="btn-admin">⚙</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-      .alerta-confirmacao h2 {
-        margin-bottom: 10px;
-      }
+    <!-- Modal de Confirmação -->
+    <div id="modal-confirmacao" class="modal-overlay">
+        <div class="modal-card confirmacao-card">
+            <button class="modal-close" onclick="fecharModal()">✕</button>
+            
+            <div class="confirmacao-header">
+                <div class="confirmacao-icone">✓</div>
+                <h2>Pedido Confirmado!</h2>
+                <p>Obrigado pela sua compra. Seu pedido foi realizado com sucesso.</p>
+            </div>
 
-      #numero-pedido {
-        font-weight: bold;
-        color: #d4a017; /* dourado */
-        font-size: 1.2rem;
-      }
+            <div class="confirmacao-conteudo">
+                <h3>Resumo do Pedido</h3>
+                
+                <div class="confirmacao-secao">
+                    <h4>Produtos</h4>
+                    <div id="confirmacao-produtos" class="confirmacao-lista-produtos">
+                        <!-- Produtos serão inseridos aqui via JavaScript -->
+                    </div>
+                </div>
 
-      .btn {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 20px;
-        background: #d4a017;
-        color: #fff;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-      }
+                <div class="confirmacao-secao">
+                    <h4>Endereço de Entrega</h4>
+                    <div id="confirmacao-endereco" class="confirmacao-info">
+                        <!-- Endereço será inserido aqui via JavaScript -->
+                    </div>
+                </div>
 
-      .btn:hover {
-        background: #b58810;
-      }
-    </style>
-  </head>
+                <div class="confirmacao-secao">
+                    <h4>Forma de Pagamento</h4>
+                    <div id="confirmacao-pagamento" class="confirmacao-info">
+                        <!-- Forma de pagamento será inserida aqui via JavaScript -->
+                    </div>
+                </div>
 
-  <body>
-    <div class="alerta-confirmacao">
-      <h2>Compra Confirmada! 🎉</h2>
+                <div class="confirmacao-secao">
+                    <h4>Prazo de Entrega</h4>
+                    <div id="confirmacao-prazo" class="confirmacao-info">
+                        <!-- Prazo será inserido aqui via JavaScript -->
+                    </div>
+                </div>
 
-      <p>Obrigado por comprar conosco.</p>
+                <div class="confirmacao-totais">
+                    <div class="confirmacao-linha-total">
+                        <span>Subtotal:</span>
+                        <span id="confirmacao-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="confirmacao-linha-total">
+                        <span>Frete:</span>
+                        <span id="confirmacao-frete">R$ 0,00</span>
+                    </div>
+                    <div class="confirmacao-linha-total total-destaque">
+                        <span>Total:</span>
+                        <span id="confirmacao-total">R$ 0,00</span>
+                    </div>
+                </div>
+            </div>
 
-      <p>Seu número de pedido é:</p>
-      <p id="numero-pedido"></p>
-
-      <a href="../index.html" class="btn">Voltar à Loja</a>
+            <div class="confirmacao-footer">
+                <button class="btn-destaque" onclick="voltarParaHome()">Voltar para Início</button>
+            </div>
+        </div>
     </div>
 
-    <script>
-      const idPedido = Math.floor(Math.random() * 900000 + 100000);
-      document.getElementById("numero-pedido").textContent = idPedido;
+    <footer class="footer">
+        <div class="container">
+             <p>© 2025 Music Store. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-      localStorage.removeItem("carrinho");
+    <script src="../js/script.js"></script>
+    <script>
+        // Exibe o modal de confirmação ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            exibirConfirmacaoPedido();
+        });
+
+        function exibirConfirmacaoPedido() {
+            // Recupera dados do pedido do localStorage
+            const dadosPedido = JSON.parse(localStorage.getItem('dadosPedido'));
+            
+            if (!dadosPedido) {
+                // Se não houver dados, redireciona para home
+                window.location.href = '../index.html';
+                return;
+            }
+
+            // Preenche produtos
+            const produtosContainer = document.getElementById('confirmacao-produtos');
+            produtosContainer.innerHTML = dadosPedido.produtos.map(p => `
+                <div class="confirmacao-produto-item">
+                    <span class="produto-nome">${p.nome} <strong>(x${p.qtd})</strong></span>
+                    <span class="produto-preco">${formatarMoeda(p.preco * p.qtd)}</span>
+                </div>
+            `).join('');
+
+            // Preenche endereço
+            const enderecoContainer = document.getElementById('confirmacao-endereco');
+            enderecoContainer.innerHTML = `
+                <p><strong>CEP:</strong> ${dadosPedido.endereco.cep}</p>
+                <p><strong>Endereço:</strong> ${dadosPedido.endereco.logradouro}</p>
+                <p><strong>Bairro:</strong> ${dadosPedido.endereco.bairro}</p>
+                <p><strong>Cidade:</strong> ${dadosPedido.endereco.cidade} - ${dadosPedido.endereco.uf}</p>
+            `;
+
+            // Preenche forma de pagamento
+            const pagamentoContainer = document.getElementById('confirmacao-pagamento');
+            let textoPagamento = '';
+            switch(dadosPedido.pagamento.forma) {
+                case 'cartao':
+                    textoPagamento = 'Cartão de Crédito';
+                    break;
+                case 'pix':
+                    textoPagamento = 'PIX';
+                    break;
+                case 'boleto':
+                    textoPagamento = 'Boleto Bancário';
+                    break;
+            }
+            pagamentoContainer.innerHTML = `<p>${textoPagamento}</p>`;
+
+            // Preenche prazo de entrega
+            const prazoContainer = document.getElementById('confirmacao-prazo');
+            let textoPrazo = '';
+            switch(dadosPedido.frete.tipo) {
+                case 'normal':
+                    textoPrazo = '5 a 8 dias úteis';
+                    break;
+                case 'expresso':
+                    textoPrazo = '2 a 3 dias úteis';
+                    break;
+            }
+            prazoContainer.innerHTML = `<p>${textoPrazo}</p>`;
+
+            // Preenche totais
+            document.getElementById('confirmacao-subtotal').textContent = formatarMoeda(dadosPedido.valores.subtotal);
+            document.getElementById('confirmacao-frete').textContent = formatarMoeda(dadosPedido.valores.frete);
+            document.getElementById('confirmacao-total').textContent = formatarMoeda(dadosPedido.valores.total);
+
+            // Exibe o modal
+            document.getElementById('modal-confirmacao').style.display = 'flex';
+        }
+
+        function fecharModal() {
+            document.getElementById('modal-confirmacao').style.display = 'none';
+            window.location.href = '../index.html';
+        }
+
+        function voltarParaHome() {
+            // Limpa os dados do pedido
+            localStorage.removeItem('dadosPedido');
+            window.location.href = '../index.html';
+        }
     </script>
-    <div id="alerta-msg" class="alerta-popup"></div>
-  </body>
+</body>
 </html>

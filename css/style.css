@@ -1,46 +1,37 @@
-/* ==========================================================
-   STYLE.CSS — MUSIC STORE
-   Tema: Clássico Premium | Madeiras + Dourado + Preto
-   Versão Otimizada e Melhorada
-   ========================================================== */
 
-/* ==========================
-   VARIÁVEIS DE TEMA
-   ========================== */
 :root {
-  --cor-fundo: #b3895a63;
-  /* Fundo com leve transparência */
-  --cor-card: #a06d41e0;
-  /* Cartões com cor madeira suave */
-  --cor-destaque: #ffffff;
-  /* Dourado claro/Branco */
-  --cor-texto: #f4f4f4;
-  /* Texto principal */
-  --cor-texto-sec: #cfcfcf;
-  /* Texto secundário */
-  --cor-madeira: #5e3b24;
-  /* Marrom madeira */
-  --cor-hover: #e1d4b8;
-  /* Hover elegante */
-  --cor-erro: #f44336;
-  --cor-sucesso: #4caf50;
-  --preto: #111;
-  --branco: #fff;
+  /* Cores principais */
+  --color-bg: #0e0b09;
+  --color-surface: #1b1410;
+  --color-card: #231814;
+  --color-accent: #f6c453;     /* dourado jovem */
+  --color-accent-soft: #fbe3a3;
+  --color-wood: #8b5a2b;       /* madeira principal */
+  --color-wood-dark: #5d381a;  /* madeira escura */
+  --color-text: #f5f5f5;
+  --color-text-muted: #b5b5b5;
+  --color-danger: #f44336;
+  --color-success: #4caf50;
+  --color-border-soft: rgba(255, 255, 255, 0.08);
 
-  --fonte-titulo: "Playfair Display", serif;
-  --fonte-texto: "Open Sans", sans-serif;
+  /* Tipografia */
+  --font-title: "Playfair Display", serif;
+  --font-body: "Open Sans", sans-serif;
 
-  --sombra-card: 0 10px 25px rgba(0, 0, 0, 0.4);
-  --sombra-suave: 0 5px 12px rgba(0, 0, 0, 0.25);
-  --transicao: all .4s ease;
+  /* Sombra & transições */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.5);
+  --transition-fast: all 0.25s ease-out;
+  --transition: all 0.35s ease;
 }
 
 /* ==========================
-   RESET E ESTRUTURA BASE
+   RESET & BASE GLOBAL
    ========================== */
+
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -48,100 +39,179 @@ html,
 body {
   width: 100%;
   min-height: 100%;
-  font-family: var(--fonte-texto);
-  background: var(--cor-fundo);
-  color: var(--cor-texto);
+  background: radial-gradient(circle at top, #2b1a12 0, #0a0705 50%, #050302 100%);
+  color: var(--color-text);
+  font-family: var(--font-body);
   scroll-behavior: smooth;
+}
+
+
+body {
+  padding-top: 80px;
 }
 
 a {
   text-decoration: none;
-  color: var(--cor-destaque);
-  transition: var(--transicao);
+  color: inherit;
+  transition: var(--transition-fast);
 }
 
-a:hover {
-  color: var(--cor-hover);
+img {
+  max-width: 100%;
+  display: block;
 }
 
 .container {
   width: 90%;
-  max-width: 1250px;
-  margin: auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Títulos padrão */
 h2 {
-  font-family: var(--fonte-titulo);
+  font-family: var(--font-title);
   font-size: 2rem;
-  color: var(--cor-destaque);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  color: #ffffff;
 }
 
-/* Texto especial */
+/* Texto destaque */
 .bolder {
-  font-family: var(--fonte-titulo);
+  font-family: var(--font-title);
   font-weight: 700;
-  color: var(--cor-destaque);
+  color: var(--color-accent-soft);
 }
 
-/* ==========================================================
-   HEADER FIXO PREMIUM
-   ========================================================== */
+/* ==========================
+   BOTÕES & ELEMENTOS GERAIS
+   ========================== */
+
+.btn-destaque {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-accent), #ffdd7f);
+  color: #1b120b;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+
+.btn-destaque:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+  filter: brightness(1.05);
+}
+
+.btn-destaque:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Botão secundário (links em cards/admin etc) */
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border-soft);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-secundario:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Link estilo "clique aqui" */
+.link-acao {
+  color: var(--color-accent-soft);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.link-acao:hover {
+  color: #fff;
+}
+
+/* ==========================
+   HEADER FIXO
+   ========================== */
+
 .header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  background: #7a542f;
-  border-bottom: 2px solid #000;
-  box-shadow: var(--sombra-suave);
-  z-index: 999;
-  padding: 10px 0;
-  backdrop-filter: blur(5px);
+  background: linear-gradient(90deg, #1c120c, #2a1810);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.75);
+  z-index: 1000;
 }
 
 .header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
 }
 
-/* LOGO */
+/* Logo */
 .logo {
-  font-family: var(--fonte-titulo);
+  font-family: var(--font-title);
   font-size: 1.9rem;
   letter-spacing: 1px;
-  color: var(--branco);
 }
 
 .logo a {
-  color: var(--branco);
+  color: #ffffff;
 }
 
-/* ==========================================================
-   NAVIGAÇÃO E MENU PREMIUM
-   ========================================================== */
+.logo a:hover {
+  color: var(--color-accent-soft);
+}
+
+/* Navegação */
 .nav ul {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 26px;
+  align-items: center;
 }
 
 .nav a {
-  font-weight: 600;
-  color: var(--cor-texto);
   position: relative;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  padding-bottom: 3px;
 }
 
-/* Linha animada inferior */
 .nav a::after {
   content: "";
-  width: 0%;
-  height: 2px;
-  background: var(--branco);
   position: absolute;
-  bottom: -3px;
   left: 0;
-  transition: var(--transicao);
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--color-accent), #ffe6a8);
+  transition: width 0.24s ease-out;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #ffffff;
 }
 
 .nav a:hover::after,
@@ -149,877 +219,1394 @@ h2 {
   width: 100%;
 }
 
-/* MENU MOBILE FUTURO (já preparado) */
-.menu-toggle {
-  display: none;
-  cursor: pointer;
-  color: var(--branco);
-  font-size: 1.8rem;
+/* Ícone de admin no header */
+.admin-icone {
+  font-size: 1.25rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 196, 83, 0.7);
+  background: radial-gradient(circle at top, rgba(246, 196, 83, 0.25), transparent);
 }
 
-/* Responsividade inicial */
-@media (max-width: 850px) {
-  .nav ul {
-    gap: 15px;
-  }
-
-  .logo {
-    font-size: 1.6rem;
-  }
+.admin-icone:hover {
+  background: rgba(246, 196, 83, 0.15);
 }
 
+/* ==========================
+   BANNER (HOME)
+   ========================== */
 
-/* ==========================================================
-   BANNERS E SEÇÕES PRINCIPAIS
-   ========================================================== */
-
-section {
-  padding: 80px 0;
-}
-
-/* Banner principal da Home */
 .banner {
-  min-height: 65vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('../img/banner1.webp') center/cover no-repeat;
+  min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)),
+    url("../img/banner1.webp") center/cover no-repeat;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(246, 196, 83, 0.15), transparent 55%);
+  pointer-events: none;
 }
 
 .banner-content {
-  color: var(--cor-texto);
-  max-width: 650px;
+  position: relative;
+  max-width: 550px;
   padding: 20px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 .banner-content h2 {
-  font-family: var(--fonte-titulo);
-  font-size: 2.6rem;
-  color: var(--cor-destaque);
-  margin-bottom: 12px;
+  font-family: var(--font-title);
+  font-size: 2.7rem;
+  margin-bottom: 15px;
+  line-height: 1.15;
 }
 
 .banner-content p {
-  color: var(--cor-texto-sec);
-  margin-bottom: 25px;
-  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
 }
 
-/* Botão principal */
-.btn-destaque {
-  display: inline-block;
-  background-color: #000;
-  color: #fff;
-  padding: 12px 30px;
-  border-radius: 30px;
-  font-weight: 600;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: var(--transicao);
+/* ==========================
+   SEÇÕES HOME (DESTAQUES / NOVIDADES)
+   ========================== */
+
+section {
+  padding: 70px 0;
 }
 
-.btn-destaque:hover {
-  background-color: var(--branco);
-  color: #000;
-  border-color: #000;
-  transform: translateY(-2px);
-}
-
-/* Seção de Destaques */
-.destaques {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url('../img/instrumentos-musicais-em-ingles.jpg') center/cover no-repeat;
-}
-
-/* Seção de Novidades */
+.destaques,
 .novidades {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url('../img/instrumentos-musicais-voce-sabe-quais-sao-os-mais-tocados-no-mundo-20191202180617.jpg.jpg') center/cover no-repeat;
+  background: radial-gradient(circle at top, #2a1810 0, #130c08 55%, #050302 100%);
 }
 
-/* Títulos das seções */
-.destaques .container h2,
-.novidades .container h2 {
-  text-align: left;
+.destaques .container,
+.novidades .container {
+  text-align: center;
 }
 
-/* ==========================================================
-   CATÁLOGO DE PRODUTOS (PÁGINA produtos.html)
-   ========================================================== */
+.destaques h2,
+.novidades h2 {
+  margin-bottom: 35px;
+}
+
+/* ==========================
+   GRID DE PRODUTOS (CARDS)
+   ========================== */
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 26px;
+}
+
+/* Card de produto */
+.card-produto {
+  background: linear-gradient(145deg, rgba(27, 20, 16, 0.98), rgba(35, 24, 18, 0.98));
+  border-radius: 18px;
+  padding: 14px 14px 18px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+  transition: var(--transition);
+}
+
+.card-produto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(246, 196, 83, 0.08), transparent 60%);
+  opacity: 0;
+  transition: var(--transition-fast);
+  pointer-events: none;
+}
+
+.card-produto:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.7);
+  border-color: rgba(246, 196, 83, 0.4);
+}
+
+.card-produto:hover::before {
+  opacity: 1;
+}
+
+/* Imagem do card */
+.card-produto img {
+  width: 100%;
+  height: 210px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+}
+
+/* Conteúdo do card */
+.card-produto h3 {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.card-produto .preco {
+  color: var(--color-accent-soft);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* Botões no card */
+.card-produto .btn-ver,
+.card-produto .btn-add {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Botão "Ver produto" como secundário */
+.card-produto .btn-ver {
+  text-align: center;
+  background: transparent;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  padding: 9px 0;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.card-produto .btn-ver:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Botão "Adicionar ao carrinho" */
+.card-produto .btn-add {
+  margin-top: 6px;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-accent), #ffdd7f);
+  color: #1b120b;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 20px rgba(246, 196, 83, 0.3);
+}
+
+.card-produto .btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(246, 196, 83, 0.45);
+  filter: brightness(1.08);
+}
+
+.card-produto .btn-add:active {
+  transform: translateY(0);
+}
+
+/* ==========================
+   CATÁLOGO (produtos.html)
+   ========================== */
 
 .catalogo {
-  background: linear-gradient(#cfa87aaa, #b58c65aa);
-  padding-top: 60px;
-  border-radius: 8px;
+  margin-top: 40px;
+  padding: 70px 30px;
+  border-radius: 18px;
+  position: relative;
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+    url("../img/background-instrumentos.jpg") center/cover no-repeat;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
+.catalogo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(246, 196, 83, 0.2), transparent 55%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.catalogo > * {
+  position: relative;
+  z-index: 1;
+}
+
+.catalogo h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Filtros de busca */
 .filtros {
-  background: rgba(255, 255, 255, 0.5);
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: var(--sombra-suave);
-}
-
-#lista-produtos {
-  padding-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .filtros input,
 .filtros select {
-  padding: 12px 18px;
-  border-radius: 8px;
-  border: 1px solid #3e2a1e;
-  background-color: #fff;
-  color: #000;
-  font-size: 1rem;
-  width: 250px;
-  transition: var(--transicao);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  padding: 11px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 0.92rem;
+  min-width: 220px;
+  outline: none;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  transition: var(--transition-fast);
+}
+
+.filtros input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .filtros input:focus,
 .filtros select:focus {
-  border-color: var(--cor-madeira);
-  box-shadow: 0 0 8px rgba(160, 113, 70, 0.7);
-  outline: none;
+  border-color: rgba(246, 196, 83, 0.75);
+  box-shadow: 0 0 0 1px rgba(246, 196, 83, 0.55),
+    0 12px 26px rgba(0, 0, 0, 0.85);
 }
 
-/* ==========================================================
-   GRID DE PRODUTOS
-   ========================================================== */
+/* ==========================
+   CARRINHO (carrinho.html)
+   ========================== */
 
-.produtos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
+.carrinho-page {
+  margin-top: 40px;
+  padding-bottom: 90px;
 }
 
-/* CARD DE PRODUTO — VERSÃO PREMIUM UNIFICADA */
-.card-produto {
-  background-color: rgba(141, 89, 41, 0.88);
-  border-radius: 16px;
-  box-shadow: var(--sombra-card);
-  overflow: hidden;
-  transition: var(--transicao);
-  position: relative;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+.carrinho-page h2 {
   text-align: center;
-  padding: 15px;
+  margin-bottom: 32px;
 }
 
-.card-produto:hover {
-  transform: translateY(-8px);
-  border-color: var(--cor-destaque);
+/* Lista de itens do carrinho */
+.lista-carrinho {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 35px;
 }
 
-/* Imagem do produto */
-.card-produto img {
-  width: 100%;
-  height: 230px;
+/* Item visual do carrinho */
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(130deg, #1b1410, #241610);
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border-soft);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-fast);
+}
+
+.item-carrinho:hover {
+  transform: translateY(-2px);
+  border-color: rgba(246, 196, 83, 0.5);
+}
+
+/* Imagem no carrinho */
+.item-carrinho img {
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  transition: transform 0.5s ease;
+  border-radius: 14px;
 }
 
-.card-produto:hover img {
-  transform: scale(1.06);
+/* Info do carrinho */
+.info-carrinho {
+  flex: 1;
 }
 
-/* Título do produto */
-.card-produto h3 {
-  font-family: var(--fonte-titulo);
-  font-size: 1.25rem;
-  margin-bottom: 8px;
-  color: #fff;
+.info-carrinho h3 {
+  font-family: var(--font-title);
+  font-size: 1rem;
 }
 
-/* Preço */
-.card-produto .preco {
-  color: #fffbdd;
-  font-size: 1.1rem;
-  font-weight: bold;
+.info-carrinho p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.info-carrinho .preco {
+  color: var(--color-accent-soft);
+  font-weight: 600;
+}
+
+/* Botão remover no carrinho */
+.btn-remover {
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-remover:hover {
+  background: rgba(244, 67, 54, 0.1);
+  border-color: rgba(244, 67, 54, 0.7);
+}
+
+/* Resumo de compra */
+.resumo-compra {
+  max-width: 380px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #1f1510, #2b1911);
+  border-radius: 18px;
+  padding: 18px 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.resumo-compra h3 {
+  font-family: var(--font-title);
   margin-bottom: 10px;
 }
 
-/* Botões internos (Ver Produto / Adicionar) */
-.card-produto .btn-ver {
-  display: inline-block;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-  padding: 6px 16px;
-  border-radius: 20px;
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  transition: var(--transicao);
-}
-
-.card-produto .btn-ver:hover {
-  background: #fff;
-  color: #000;
-}
-
-.card-produto .btn-add {
-  margin-top: 5px;
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 10px 22px;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transicao);
-}
-
-.card-produto .btn-add:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-/* Linha decorativa inferior */
-.card-produto::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 5px;
-  width: 0%;
-  background: #fff;
-  transition: width 0.4s ease;
-}
-
-.card-produto:hover::after {
-  width: 100%;
-}
-
-/* Responsividade da grade */
-@media (max-width: 768px) {
-  .filtros {
-    flex-direction: column;
-  }
-
-  .filtros input,
-  .filtros select {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-
-/* ==========================================================
-   FORMULÁRIOS GERAIS (LOGIN, CADASTRO, PAGAMENTO)
-   ========================================================== */
-
-.form-container {
-  min-height: 100vh;
-  padding-top: 110px;
-  /* compensa header fixo */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: var(--cor-fundo);
-}
-
-/* Cartão de Login/Cadastro */
-.login-card {
-  background-color: #a07146;
-  border-radius: 14px;
-  box-shadow: var(--sombra-card);
-  padding: 35px;
-  width: 100%;
-  max-width: 430px;
-  text-align: center;
-  margin: 30px 0 80px 0;
-}
-
-.login-card h2 {
-  font-family: var(--fonte-titulo);
-  color: var(--cor-destaque);
-  margin-bottom: 20px;
-}
-
-.login-card label {
-  display: block;
-  text-align: left;
-  font-weight: 600;
-  color: var(--cor-texto);
-  margin-bottom: 6px;
+.resumo-compra p {
   font-size: 0.95rem;
+  margin: 4px 0;
 }
 
-.login-card input {
-  width: 100%;
-  padding: 11px 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 2px solid #333;
-  background-color: #ffffff;
-  color: #000;
-  font-size: 0.98rem;
-  transition: var(--transicao);
-}
-
-.login-card input:focus {
-  outline: none;
-  border-color: rgba(202, 182, 125, 0.9);
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-}
-
-.login-card .btn-destaque {
-  width: 100%;
+.resumo-compra .total {
+  font-size: 1.2rem;
+  color: var(--color-accent-soft);
   margin-top: 10px;
 }
 
-.link-secundario {
-  margin-top: 18px;
-  color: #fff;
+/* ==========================
+   PÁGINA DETALHE PRODUTO
+   ========================== */
+
+#produto-detalhe,
+#detalhe-produto {
+  margin-top: 40px;
+}
+
+/* Layout grid detalhado */
+#detalhe-produto {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 32px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top, #26150f 0, #0b0603 65%);
+  box-shadow: var(--shadow-card);
+}
+
+/* Imagem grande */
+.img-produto {
+  width: 100%;
+  max-width: 460px;
+  height: 400px;
+  border-radius: 18px;
+  object-fit: contain;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+}
+
+/* Informações */
+.info-produto h2 {
+  font-family: var(--font-title);
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+}
+
+.info-produto .preco {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-accent-soft);
+  margin-bottom: 8px;
+}
+
+.info-produto .estoque {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+}
+
+.info-produto h3 {
+  font-family: var(--font-title);
+  margin-bottom: 6px;
+}
+
+.info-produto p {
   font-size: 0.95rem;
+  margin-bottom: 14px;
+  color: var(--color-text);
+}
+
+/* ==========================
+   FORMULÁRIOS: LOGIN, CADASTRO, PAGAMENTO
+   ========================== */
+
+.form-container {
+  min-height: 100vh;
+  padding-top: 90px;
+  padding-bottom: 80px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: radial-gradient(circle at top, #25150e 0, #0a0502 55%, #000 100%);
+}
+
+/* Cartão central */
+.login-card {
+  background: linear-gradient(150deg, #1d140f, #24130c);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  padding: 30px 26px;
+  width: 100%;
+  max-width: 430px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.login-card h3 {
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+/* Labels e inputs */
+.login-card label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.login-card input,
+.login-card select,
+.login-card textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(16, 10, 7, 0.85);
+  color: #ffffff;
+  font-size: 0.93rem;
+  margin-bottom: 12px;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.login-card textarea {
+  resize: vertical;
+}
+
+.login-card input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.login-card input:focus,
+.login-card select:focus,
+.login-card textarea:focus {
+  border-color: rgba(246, 196, 83, 0.8);
+  box-shadow: 0 0 0 1px rgba(246, 196, 83, 0.6);
+}
+
+/* Botão principal dentro do card */
+.login-card .btn-destaque {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Links secundários (ex: "já possui conta?") */
+.link-secundario {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
 }
 
 .link-secundario a {
-  color: var(--cor-destaque);
+  color: var(--color-accent-soft);
   font-weight: 600;
 }
 
 .link-secundario a:hover {
-  color: #000;
+  color: #ffffff;
 }
 
-/* "Esqueceu a senha" */
-.recuperar-senha {
-  margin-top: 20px;
-  color: var(--cor-texto-sec);
-}
-
-.recuperar-senha a {
-  font-size: 0.9rem;
-  text-decoration: underline;
-}
-
-/* Formulário genérico (ex: cadastro/pagamento) */
-.form-container form {
-  width: 100%;
-  max-width: 430px;
-}
-
-.form-container form label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: var(--cor-texto);
-}
-
-.form-container form input,
-.form-container form select {
-  width: 100%;
-  padding: 11px 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 2px solid #333;
-  background-color: #ffffff;
-  color: #000;
-  font-size: 0.98rem;
-  transition: var(--transicao);
-}
-
-.form-container form input:focus,
-.form-container form select:focus {
-  outline: none;
-  border-color: rgba(202, 182, 125, 0.9);
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-}
-
-/* ==========================================================
-   PÁGINA DE DETALHE DO PRODUTO (produto.html)
-   ========================================================== */
-
-.produto-detalhe {
-  margin-top: 120px;
-  padding-bottom: 80px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 40px;
-  align-items: flex-start;
-}
-
-.coluna-imagem img {
-  width: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: var(--sombra-card);
-  border: 1px solid rgba(0, 0, 0, 0.7);
-}
-
-.coluna-info h2 {
-  text-align: left;
-  margin-bottom: 10px;
-}
-
-.coluna-info .preco {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #fffbdd;
-  margin-bottom: 10px;
-}
-
-.coluna-info .estoque {
-  font-size: 0.95rem;
-  margin-bottom: 18px;
-  color: var(--cor-texto-sec);
-}
-
-.coluna-info h3 {
-  font-family: var(--fonte-titulo);
-  margin-bottom: 8px;
-}
-
-.coluna-info p {
-  margin-bottom: 12px;
-}
-
-.coluna-info .btn-destaque {
-  margin-top: 10px;
-}
-
-/* Responsivo - Detalhe Produto */
-@media (max-width: 900px) {
-  .produto-detalhe {
-    grid-template-columns: 1fr;
-  }
-
-  .coluna-info h2 {
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  .coluna-info {
-    text-align: center;
-  }
-}
-
-/* ==========================================================
-   PÁGINA DO CARRINHO (carrinho.html)
-   ========================================================== */
-
-.carrinho-page {
-  margin-top: 120px;
-  padding-bottom: 100px;
-}
-
-.carrinho-page h2 {
-  font-family: var(--fonte-titulo);
-  color: var(--cor-destaque);
+/* Esqueceu a senha */
+.esqueceu {
   text-align: center;
-  margin-bottom: 40px;
+  margin-top: 8px;
 }
 
-/* Lista de itens */
-.lista-carrinho {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 40px;
+.esqueceu a {
+  font-size: 0.82rem;
+  text-decoration: underline;
+  color: var(--color-text-muted);
 }
 
-/* Item do carrinho */
-.item-carrinho {
+.esqueceu a:hover {
+  color: var(--color-accent-soft);
+}
+
+/* Checkbox admin no cadastro */
+.admin-check {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: var(--cor-card);
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: var(--sombra-suave);
-  border: 1px solid #000;
-  transition: var(--transicao);
+  gap: 6px;
+  margin: 8px 0 16px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
 }
 
-.item-carrinho:hover {
-  transform: scale(1.01);
-  border-color: var(--cor-madeira);
+.admin-check input {
+  transform: scale(1.1);
 }
 
-/* Detalhes internos (se quiser imagens no futuro) */
-.item-carrinho img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid #000;
-}
-
-.item-carrinho span {
-  margin: 0 8px;
-}
-
-/* Botão remover item */
-.btn-remover {
-  background-color: #000;
-  border: 2px solid transparent;
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: .3s;
-}
-
-.btn-remover:hover {
-  background: #fff;
-  color: #000;
-  border-color: #000;
-  transform: scale(1.05);
-}
-
-/* Resumo da compra */
-.resumo-compra {
-  background-color: var(--cor-card);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: var(--sombra-card);
-  max-width: 420px;
-  margin: 0 auto;
-  text-align: center;
-  border: 1px solid #000;
-}
-
-.resumo-compra h3 {
-  font-family: var(--fonte-titulo);
-  color: var(--cor-destaque);
-  margin-bottom: 18px;
-}
-
-.resumo-compra p {
-  font-size: 1rem;
-  margin: 6px 0;
-}
-
-.resumo-compra .total {
-  font-size: 1.25rem;
-  color: var(--cor-destaque);
-  margin-top: 12px;
-}
-
-.resumo-compra .btn-destaque {
+/* Google login */
+.google-login {
   margin-top: 18px;
-  width: 100%;
-  font-size: 1.05rem;
-  border-radius: 30px;
-}
-
-/* Responsivo carrinho */
-@media (max-width: 768px) {
-  .item-carrinho {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .item-carrinho img {
-    margin-bottom: 8px;
-  }
-
-  .btn-remover {
-    margin-top: 5px;
-  }
-}
-
-/* ==========================================================
-   ALERTAS DO SISTEMA (ERRO / SUCESSO)
-   ========================================================== */
-
-.alerta {
-  padding: 12px;
-  border-radius: 6px;
-  margin: 15px 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
-  font-weight: 600;
-  font-size: 0.95rem;
 }
 
-.alerta.erro {
-  background-color: var(--cor-erro);
-  color: #fff;
+.google-login p {
+  margin-bottom: 10px;
+  color: var(--color-text-muted);
 }
 
-.alerta.sucesso {
-  background-color: var(--cor-sucesso);
-  color: #fff;
-}
-
-
-/* ==========================================================
-   PAINEL ADMINISTRATIVO — UX/UI PREMIUM
-   ========================================================== */
-
-.admin-container {
-  margin-top: 120px;
-  padding: 40px;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: var(--cor-card);
-  border-radius: 15px;
-  box-shadow: var(--sombra-card);
-  color: var(--cor-texto);
-}
-
-/* Cabeçalho do Admin */
-.admin-header {
+/* Form de pagamento específico */
+.pagamento-card h2 {
   text-align: center;
-  margin-bottom: 30px;
-}
-
-.admin-header h2 {
-  font-family: var(--fonte-titulo);
-  font-size: 2.1rem;
-  color: var(--cor-destaque);
-}
-
-.admin-header p {
-  color: var(--cor-texto-sec);
-}
-
-/* Formulário de Cadastro/Edicão */
-.admin-form {
-  background-color: rgba(0, 0, 0, 0.25);
-  padding: 30px;
-  border-radius: 12px;
-  margin-bottom: 50px;
-}
-
-.input-group {
   margin-bottom: 20px;
 }
 
-.input-group label {
-  display: block;
-  font-weight: bold;
-  color: var(--cor-texto);
+.pagamento-card h3 {
+  margin-top: 16px;
   margin-bottom: 8px;
 }
 
-.input-group input,
-.input-group textarea {
+.pagamento-card #valorFrete,
+.pagamento-card #totalPagamento {
+  font-size: 0.95rem;
+  margin: 4px 0;
+}
+
+/* ==========================
+   PÁGINA ADMIN
+   ========================== */
+
+.admin-container {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  padding: 32px 26px;
+  background: linear-gradient(145deg, #1c120d, #24140e);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.admin-header h2 {
+  margin-bottom: 6px;
+}
+
+.admin-header p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* Form admin */
+.admin-form {
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.25));
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Input groups para admin */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.admin-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  background-color: #ffffff;
-  color: #000;
-  font-size: 1rem;
-}
-
-.input-group textarea {
-  resize: vertical;
-}
-
-/* Preview de imagem */
-.preview {
-  display: none;
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
+  padding: 11px 13px;
   border-radius: 10px;
-  border: 2px solid #000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(16, 10, 7, 0.85);
+  color: #ffffff;
+  font-size: 0.93rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.admin-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  border-color: rgba(246, 196, 83, 0.8);
+  box-shadow: 0 0 0 2px rgba(246, 196, 83, 0.3);
+}
+
+.admin-form .btn-destaque {
+  width: 100%;
   margin-top: 10px;
 }
 
-/* Lista de produtos cadastrados */
+/* Lista de produtos admin */
 .lista-produtos-admin {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
 }
 
-/* Card do Admin */
+/* Card admin individual */
 .card-admin {
-  background-color: #a07146;
-  border-radius: 12px;
-  box-shadow: var(--sombra-card);
-  padding: 20px;
+  background: linear-gradient(140deg, #21130d, #2a1810);
+  border-radius: 16px;
+  padding: 14px 14px 18px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
-  border: 1px solid #000;
-  transition: var(--transicao);
-  color: #fff;
+  transition: var(--transition-fast);
 }
 
 .card-admin:hover {
-  transform: translateY(-6px);
-  border-color: var(--cor-destaque);
+  transform: translateY(-3px);
+  border-color: rgba(246, 196, 83, 0.6);
 }
 
 .card-admin img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
+  height: 170px;
+  object-fit: contain;
+  border-radius: 14px;
   margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 8px;
 }
 
 .card-admin h4 {
-  font-family: var(--fonte-titulo);
-  margin-bottom: 5px;
-}
-
-.card-admin p {
-  color: var(--cor-texto-sec);
-  font-size: 0.9rem;
-  margin-bottom: 10px;
+  font-family: var(--font-title);
+  margin-bottom: 4px;
 }
 
 .card-admin .preco {
-  font-weight: bold;
-  color: var(--cor-destaque);
-  margin-bottom: 12px;
+  color: var(--color-accent-soft);
+  font-weight: 700;
+  margin-bottom: 3px;
 }
 
-/* Botões de edição/exclusão */
+.card-admin p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Ações admin */
 .admin-acoes {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .btn-editar,
 .btn-excluir {
+  border-radius: 999px;
+  padding: 8px 16px;
   border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
-  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
-  transition: var(--transicao);
+  font-weight: 600;
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Botão editar */
 .btn-editar {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
+  background: linear-gradient(135deg, rgba(246, 196, 83, 0.2), rgba(246, 196, 83, 0.35));
+  color: var(--color-accent-soft);
+  border: 1px solid rgba(246, 196, 83, 0.4);
 }
 
 .btn-editar:hover {
-  background-color: var(--cor-hover);
+  background: linear-gradient(135deg, rgba(246, 196, 83, 0.35), rgba(246, 196, 83, 0.5));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(246, 196, 83, 0.4);
 }
 
-/* Botão excluir */
 .btn-excluir {
-  background-color: #000;
-  color: #fff;
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.25), rgba(244, 67, 54, 0.4));
+  color: #ffb3af;
+  border: 1px solid rgba(244, 67, 54, 0.5);
 }
 
 .btn-excluir:hover {
-  background-color: var(--cor-erro);
-  color: #fff;
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.4), rgba(244, 67, 54, 0.55));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(244, 67, 54, 0.5);
 }
 
-/* ==========================================================
-   FOOTER PREMIUM
-   ========================================================== */
+/* ==========================
+   ALERTAS VISUAIS DO SISTEMA
+   ========================== */
+
+.alerta-popup {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1f1f1f, #151515);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-25px);
+  transition: all 0.35s ease;
+  z-index: 1100;
+  border-left: 3px solid var(--color-success);
+}
+
+.alerta-popup.erro {
+  border-left-color: var(--color-danger);
+}
+
+.alerta-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ==========================
+   FOOTER
+   ========================== */
 
 .footer {
-  background-color: #7b5532;
-  border-top: 2px solid #000;
+  background: #120c08;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 0;
   text-align: center;
-  padding: 25px 0;
-  color: #fff;
+  margin-top: 40px;
 }
 
 .footer p {
-  margin-bottom: 10px;
-  color: #fff;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
 }
 
 .footer a {
-  color: var(--cor-destaque);
-  font-weight: 600;
+  color: var(--color-accent-soft);
 }
 
 .footer a:hover {
-  color: #000;
+  color: #ffffff;
 }
 
-/* Popup Premium */
-.alerta-popup {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #27ae60;
-    color: white;
-    padding: 14px 22px;
-    border-radius: 8px;
-    box-shadow: var(--sombra-card);
-    font-weight: 600;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-20px);
-    transition: all .4s ease;
-    z-index: 99999;
-}
-.alerta-popup.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* ==========================
+   RESPONSIVIDADE
+   ========================== */
 
-
-/* ==========================================================
-   RESPONSIVIDADE GLOBAL
-   ========================================================== */
-
-@media (max-width: 950px) {
-  .produto-detalhe {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .header .container {
     flex-direction: column;
     gap: 10px;
-    padding: 10px 0;
   }
 
   .nav ul {
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 10px;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .banner-content h2 {
-    font-size: 2rem;
+  .banner {
+    text-align: center;
+    padding: 40px 0;
   }
 
-  .login-card {
-    padding: 25px;
+  .banner-content {
+    max-width: 90%;
+  }
+
+  #detalhe-produto {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .img-produto {
+    margin: 0 auto 16px;
   }
 
   .catalogo {
-    margin-top: 150px;
+    padding: 60px 20px;
   }
 
   .admin-container {
-    padding: 20px;
-  }
-
-  .card-admin {
-    padding: 15px;
+    padding: 26px 18px;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .btn-destaque {
     width: 100%;
   }
 
-  .card-produto img {
-    height: 200px;
+  .item-carrinho {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .produto-detalhe {
-    gap: 20px;
+  .item-carrinho img {
+    width: 100%;
+    height: 160px;
   }
+
+  .login-card {
+    padding: 24px 20px;
+  }
+}
+
+.btn-admin {
+    background: var(--primary);
+    color: var(--light);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s ease;
+}
+
+.btn-admin:hover {
+    background: var(--primary-dark);
+}
+
+/* ==========================
+   PÁGINA DE PAGAMENTO (pagamento.html)
+   ========================== */
+
+.main-pagamento {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.main-pagamento h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+    color: var(--color-accent);
+}
+
+.pagamento-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 para o formulário, 1/3 para o resumo */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card-pagamento {
+    background: linear-gradient(145deg, rgba(27, 20, 16, 0.98), rgba(35, 24, 18, 0.98));
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin-bottom: 20px;
+}
+
+.card-pagamento h3 {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+/* Estilização de Formulário */
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    border-color: var(--color-accent);
+    outline: none;
+}
+
+.form-group-inline {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group-inline .form-field {
+    flex: 1;
+}
+
+.form-group-inline .uf-field {
+    max-width: 80px;
+}
+
+/* Resumo do Pedido */
+.resumo-pedido {
+    position: sticky;
+    top: 20px; /* Para fixar o resumo na tela */
+}
+
+#resumo-itens {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.resumo-item-nome {
+    color: #ffffff;
+}
+
+.resumo-item-preco {
+    font-weight: 600;
+    color: var(--color-accent-soft);
+}
+
+.resumo-totais p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--color-text-muted);
+}
+
+.resumo-totais .total-final {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.resumo-totais span {
+    font-weight: 700;
+}
+
+.pagamento-frete-resumo {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pagamento-frete-resumo p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.pagamento-frete-resumo .valor-total {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+}
+
+.btn-confirmar-pagamento {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .pagamento-layout {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+    .resumo-pedido {
+        position: static;
+    }
+}
+
+/* Estilização para as instruções de pagamento (Pix/Boleto) */
+.pagamento-instrucao-box {
+    padding: 20px;
+    border: 1px solid var(--color-accent-soft);
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: rgba(255, 204, 0, 0.05); /* Fundo levemente dourado */
+}
+
+.pagamento-instrucao-box h4 {
+    color: var(--color-accent);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.pagamento-instrucao-box p {
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.qr-code-placeholder {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.qr-code-placeholder img {
+    border: 4px solid var(--color-accent);
+    border-radius: 8px;
+}
+
+.aviso-pix, .aviso-boleto {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.instrucao-boleto .btn-secundario {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-secondary);
+    transition: background-color 0.3s;
+}
+
+.instrucao-boleto .btn-secundario:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+
+/* ==========================
+   MODAL DE CONFIRMAÇÃO
+   ========================== */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-card {
+    position: relative;
+    background: var(--color-card);
+    border-radius: 12px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-card);
+    animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-accent);
+    transform: rotate(90deg);
+}
+
+.confirmacao-header {
+    text-align: center;
+    padding: 40px 30px 30px;
+    border-bottom: 1px solid var(--color-border-soft);
+}
+
+.confirmacao-icone {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: var(--color-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    animation: checkPulse 0.6s ease-out;
+}
+
+@keyframes checkPulse {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.confirmacao-header h2 {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+}
+
+.confirmacao-header p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+}
+
+.confirmacao-conteudo {
+    padding: 30px;
+}
+
+.confirmacao-conteudo > h3 {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--color-accent-soft);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.confirmacao-secao {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-soft);
+}
+
+.confirmacao-secao:last-of-type {
+    border-bottom: none;
+}
+
+.confirmacao-secao h4 {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+}
+
+.confirmacao-lista-produtos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.confirmacao-produto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: var(--color-surface);
+    border-radius: 6px;
+}
+
+.confirmacao-produto-item .produto-nome {
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+.confirmacao-produto-item .produto-preco {
+    color: var(--color-accent-soft);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.confirmacao-info {
+    padding: 10px;
+    background: var(--color-surface);
+    border-radius: 6px;
+}
+
+.confirmacao-info p {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.confirmacao-info p:last-child {
+    margin-bottom: 0;
+}
+
+.confirmacao-info strong {
+    color: var(--color-accent-soft);
+}
+
+.confirmacao-totais {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--color-surface);
+    border-radius: 8px;
+}
+
+.confirmacao-linha-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+.confirmacao-linha-total.total-destaque {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid var(--color-accent);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.confirmacao-footer {
+    padding: 20px 30px 30px;
+    text-align: center;
+}
+
+.confirmacao-footer .btn-destaque {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+/* Responsividade do Modal */
+@media (max-width: 768px) {
+    .modal-card {
+        max-width: 95%;
+        margin: 20px auto;
+    }
+
+    .confirmacao-header {
+        padding: 30px 20px 20px;
+    }
+
+    .confirmacao-icone {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .confirmacao-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .confirmacao-conteudo {
+        padding: 20px;
+    }
+
+    .confirmacao-produto-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .confirmacao-linha-total.total-destaque {
+        font-size: 1.1rem;
+    }
 }
